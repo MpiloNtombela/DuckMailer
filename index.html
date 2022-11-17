@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DuckMailer - #SpreadPrivacy </title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="static/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/favicon-16x16.png">
+    <link rel="manifest" href="static/site.webmanifest">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <div class="brand-logo">
+                <a href="/">
+                    <img width="150px" src="static/dm-logo.svg" alt="Duck Address">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="https://spreadprivacy.com/" target="_blank" class="hashtag">#SpreadPrivacy</a>
+            </div>
+    </nav>
+    <div class="container">
+        <div class="card">
+            <div class="card-body grid-item">
+                <h4 class="card-title text-center mb-2"><b>DuckMailer </b>Tool</h4>
+                <div class="grid">
+                    <div class="grid-item">
+                        <form id="duckmailer-form">
+                            <div class="form-group mb-2">
+                                <label for="duck-email">Duck Address (__@duck.com)</label>
+                                <input type="text" class="form-control" id="duck-email"
+                                    pattern="[a-zA-Z0-9._%+-]+@duck\.com$" name="duck-email"
+                                    placeholder="Enter Your Duck Address (e.g name@duck.com)" required>
+                                <div id="duck-error-msg" class="input-error-message hidden"></div>
+                            </div>
+                            <!-- target email address -->
+                            <div class="form-group target-email">
+                                <label for="target-email">Target Email Address</label>
+                                <input type="email" class="form-control" id="target-email" name="target-email"
+                                    placeholder="Enter Target Email (e.g user@example.com)" required>
+                                <div id="target-error-msg" class="input-error-message hidden"></div>
+                            </div>
+                            <div class="text-end">
+                                <button id="convert-button" type="submit" class="btn btn-primary">convert email</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="grid-item duck-splash">
+                        <img src="static/D.-Proof-of-Trackers-v-4.gif" alt="Duck Address">
+                    </div>
+                </div>
+                <div id="output-container">
+                    <p class="m-0">Send your email to the following address using the forwarding address you provided
+                        when you created your '@duck.com' address.
+                    </p>
+                    <hr />
+                    <div class="output-email-container">
+                        <strong id="output-email" class="text-small">Output email</strong>
+                        <button id="output-email-copy-link"
+                            class="btn-link text-secondary text-uppercase text-small">copy</button>
+                    </div>
+                </div>
+                <p class="card-text text-small text-muted mt-2">
+                    DuckMailer is a tool that automatically converts the target address to a valid duck address that
+                    DuckDuckGo™ will accept and forward the email to the target email address.
+                </p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><b>Email Protection </b>from DuckDuckGo™</h5>
+                <p class="card-text">DuckDuckGo's email protection assigns you a free “@duck.com” email address
+                    (name@duck.com). Before forwarding the email to your personal inbox, your duck address filters out
+                    multiple types of hidden email trackers.
+                    <a href="https://spreadprivacy.com/protect-your-inbox-with-duckduckgo-email-protection/"
+                        target="_blank">Learn more</a>
+                </p>
+
+                <!-- blockquote -->
+                <blockquote class="blockquote">
+                    We remove most hidden trackers from incoming emails sent to this address, then forward them to your
+                    regular inbox for safer reading. This means if you use an email service like Gmail or Yahoo, it’s no
+                    problem! Emails
+                    sent to your Personal Duck Address will arrive there as usual so you can read your email like
+                    normal, in any app or on the
+                    web, worry-free.
+
+                    <footer class="blockquote footer">DuckDuckGo</footer>
+                </blockquote>
+
+                <!-- button to get duck email address -->
+                <div class="text-end">
+                    <a href="https://duck.com/email" target="_blank"><b>Get your @duck.com address</b></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- snackbar -->
+    <div id="snackbar" class="snackbar">
+        <p class="snackbar-text">Copied to clipboard</p>
+    </div>
+
+    <!-- bottom banner -->
+    <div class="bottom-banner">
+        <div class="bottom-banner-content">
+            <p class="text-small">DuckMailer has no affiliation with DuckDuckGo™ or endorsed by it. It's just a tool to
+                help spread the
+                word about DuckDuckGo's email protection.
+                <a href="https://spreadprivacy.com/" target="_blank" class="hashtag">#SpreadPrivacy</a>
+            </p>
+        </div>
+    </div>
+    <script src="public/script.js"></script>
+</body>
+
+</html>
