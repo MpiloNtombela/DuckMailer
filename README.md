@@ -1,6 +1,8 @@
 # DuckMailer
 
-### What is it?
+> A Mini project I created while learning TypeScript
+
+### What is DuckMailer?
 
 DuckMailer is a tool that automatically converts the target address to a valid duck address that DuckDuckGo™ will accept and forward the email to the target email address.
 
