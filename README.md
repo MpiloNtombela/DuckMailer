@@ -17,7 +17,10 @@ DuckDuckGo's email protection assigns you a free “@duck.com” email address (
   web, worry-free." <b>-DuckDuckGo</b>
 </blockquote>
 
-<!-- disclamer -->
+
+#### Disclamer
 <blockquote class="blockquote">
-DuckMailer has no affiliation with DuckDuckGo™ or endorsed by it. It's just a tool to help spread the word about DuckDuckGo's email protection.DuckDuckGo™ is a trademark of DuckDuckGo, Inc."
+  DuckMailer has no affiliation with DuckDuckGo™ or endorsed by it. It's just a tool to help spread the word about DuckDuckGo's email protection. DuckDuckGo™ is a trademark of DuckDuckGo, Inc."
 </blockquote>
+
+### [#SpreadPrivacy](https://spreadprivacy.com/)
