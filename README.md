@@ -1,4 +1,4 @@
-# DuckMailer
+#  DuckMailer ([Live here](https://mpilontombela.github.io/DuckMailer))
 
 > A Mini project I created while learning TypeScript
 
