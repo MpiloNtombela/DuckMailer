@@ -4,7 +4,7 @@
 
 ### What is DuckMailer?
 
-DuckMailer is a tool that automatically converts the target address to a valid duck address that DuckDuckGo™ will accept and forward the email to the target email address.
+Give DuckMailer your duck address and the email you want to reach, and it builds the single forwarding address DuckDuckGo™ needs to strip trackers and deliver your mail to that inbox.
 
 - Real-time form validation with inline feedback
 - Light/dark theme, following your system preference and remembered across visits
