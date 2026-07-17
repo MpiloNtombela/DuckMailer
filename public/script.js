@@ -133,7 +133,10 @@
                     outputContainer.style.display = "block";
                     requestAnimationFrame(() => outputContainer.classList.add("is-visible"));
                 }
-                copyToClipboard(convertedEmail || "", { silent: true });
+                copyToClipboard(convertedEmail || "", {
+                    successMessage: "Duck address created — copied to clipboard",
+                    failMessage: "Duck address created — copy it manually",
+                });
             }, 280);
         });
         duckAddress === null || duckAddress === void 0 ? void 0 : duckAddress.addEventListener("input", hideResult);
@@ -165,17 +168,17 @@
         if (!copy)
             return;
         const onSuccess = () => {
-            if (opts.silent)
-                return;
-            showSnackbar("Email copied to clipboard");
+            var _a;
+            showSnackbar((_a = opts.successMessage) !== null && _a !== void 0 ? _a : "Email copied to clipboard");
             markCopied();
         };
         const onFailure = () => {
+            var _a;
             if (fallbackCopy(copy)) {
                 onSuccess();
             }
-            else if (!opts.silent) {
-                showSnackbar("Couldn't copy — please copy manually");
+            else {
+                showSnackbar((_a = opts.failMessage) !== null && _a !== void 0 ? _a : "Couldn't copy — please copy manually");
             }
         };
         if ((_a = navigator.clipboard) === null || _a === void 0 ? void 0 : _a.writeText) {

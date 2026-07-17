@@ -734,22 +734,33 @@ blockquote.blockquote footer::before {
 }
 
 /* -------------------------------------------------------------------- */
+/* Form grid                                                              */
+/* -------------------------------------------------------------------- */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.grid-item {
+  min-width: 0;
+}
+
+/* -------------------------------------------------------------------- */
 /* Duck splash art                                                       */
 /* -------------------------------------------------------------------- */
 .duck-splash {
-  display: none;
+  margin-top: 1.4rem;
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  max-height: 220px;
 }
 
 .duck-splash img {
-  border: 2px solid var(--line);
-  border-radius: var(--radius);
-}
-
-@media (min-width: 640px) {
-  .duck-splash {
-    display: block;
-    margin-top: 1.4rem;
-  }
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: center 15%;
 }
 
 /* -------------------------------------------------------------------- */
