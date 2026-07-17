@@ -6,6 +6,21 @@
 
 DuckMailer is a tool that automatically converts the target address to a valid duck address that DuckDuckGo™ will accept and forward the email to the target email address.
 
+- Real-time form validation with inline feedback
+- Light/dark theme, following your system preference and remembered across visits
+- Accessible: proper labels, live regions, focus states, and keyboard support
+- Responsive layout for mobile and desktop
+- One-click copy of the generated forwarding address
+
+### Development
+
+No build tooling beyond the TypeScript compiler is required.
+
+```bash
+npx tsc          # compiles script.ts -> public/script.js
+python3 -m http.server 8000   # or any static file server, then open index.html
+```
+
 ### Whats a @duck Address / Email protection?
 
 DuckDuckGo's email protection assigns you a free “@duck.com” email address (e.g mpilo_at_duck_dot_com). Before forwarding the email to your personal inbox, your duck address filters out multiple types of hidden email trackers.
