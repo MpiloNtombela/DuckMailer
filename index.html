@@ -5,119 +5,239 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DuckMailer - #SpreadPrivacy </title>
+    <title>DuckMailer - #SpreadPrivacy</title>
+    <meta name="description"
+        content="DuckMailer converts any email address into a DuckDuckGo @duck.com forwarding address in one click, so you can protect your inbox from hidden trackers.">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0a0c12" media="(prefers-color-scheme: dark)">
+    <meta property="og:title" content="DuckMailer">
+    <meta property="og:description"
+        content="Convert any email address into a DuckDuckGo @duck.com forwarding address in one click.">
+    <meta property="og:type" content="website">
     <link rel="stylesheet" href="styles.css">
     <link rel="apple-touch-icon" sizes="180x180" href="static/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="static/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="static/favicon-16x16.png">
     <link rel="manifest" href="static/site.webmanifest">
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem("dm-theme");
+                var theme = saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+                document.documentElement.setAttribute("data-theme", theme);
+            } catch (e) { }
+        })();
+    </script>
 </head>
 
 <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+
     <nav class="navbar">
         <div class="nav-wrapper">
             <div class="brand-logo">
-                <a href="">
-                    <img width="150px" src="static/dm-logo.svg" alt="Duck Address">
+                <a href="/" aria-label="DuckMailer home">
+                    <img width="130" src="static/dm-logo.svg" alt="DuckMailer">
                 </a>
             </div>
             <div class="nav-links">
-                <a href="https://spreadprivacy.com/" target="_blank" class="hashtag">#SpreadPrivacy</a>
+                <a href="https://spreadprivacy.com/" target="_blank" rel="noopener" class="hashtag">#SpreadPrivacy</a>
+                <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false"
+                    aria-label="Toggle dark mode">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path
+                            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41">
+                        </path>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
             </div>
+        </div>
     </nav>
-    <div class="container">
-        <div class="card">
-            <div class="card-body grid-item">
-                <h4 class="card-title text-center mb-2"><b>DuckMailer </b>Tool</h4>
-                <div class="grid">
-                    <div class="grid-item">
-                        <form id="duckmailer-form">
-                            <div class="form-group mb-2">
-                                <label for="duck-email">Duck Address (__@duck.com)</label>
-                                <input type="text" class="form-control" id="duck-email"
-                                    pattern="[a-zA-Z0-9._%+-]+@duck\.com$" name="duck-email"
-                                    placeholder="Enter Your Duck Address (e.g name@duck.com)" required>
-                                <div id="duck-error-msg" class="input-error-message hidden"></div>
-                            </div>
-                            <!-- target email address -->
-                            <div class="form-group target-email">
-                                <label for="target-email">Target Email Address</label>
-                                <input type="email" class="form-control" id="target-email" name="target-email"
-                                    placeholder="Enter Target Email (e.g user@example.com)" required>
-                                <div id="target-error-msg" class="input-error-message hidden"></div>
-                            </div>
-                            <div class="text-end">
-                                <button id="convert-button" type="submit" class="btn btn-primary">convert email</button>
-                            </div>
-                        </form>
+
+    <main id="main-content">
+        <div class="container">
+            <header class="hero">
+                <h1>Email anyone through your <span class="mark">Duck&nbsp;Address</span>.</h1>
+                <p>DuckMailer builds the forwarding address DuckDuckGo needs to route your mail through its
+                    tracker-blocking inbox. Free, instant, and entirely in your browser.</p>
+            </header>
+
+            <div class="card">
+                <div class="card-body grid-item">
+                    <h4 class="card-title">
+                        <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            aria-hidden="true">
+                            <path d="M4 4h16v16H4z" opacity="0"></path>
+                            <path d="M3 7l9 6 9-6"></path>
+                            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                        </svg>
+                        DuckMailer Tool
+                    </h4>
+                    <div class="grid">
+                        <div class="grid-item">
+                            <form id="duckmailer-form" novalidate>
+                                <div class="form-group">
+                                    <label for="duck-email">Duck Address (__@duck.com)</label>
+                                    <div class="input-wrap">
+                                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            aria-hidden="true">
+                                            <path d="M3 7l9 6 9-6"></path>
+                                            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                                        </svg>
+                                        <input type="text" class="form-control" id="duck-email"
+                                            pattern="[a-zA-Z0-9._%+-]+@duck\.com$" name="duck-email"
+                                            placeholder="name@duck.com" autocomplete="email" spellcheck="false"
+                                            aria-describedby="duck-error-msg" required>
+                                    </div>
+                                    <div id="duck-error-msg" class="input-error-message hidden" role="alert">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                        </svg>
+                                        <span>Please enter a valid @duck.com email address</span>
+                                    </div>
+                                </div>
+                                <!-- target email address -->
+                                <div class="form-group target-email">
+                                    <label for="target-email">Target Email Address</label>
+                                    <div class="input-wrap">
+                                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            aria-hidden="true">
+                                            <path d="M22 12a10 10 0 1 1-5.93-9.14"></path>
+                                            <path d="M22 3L12 12"></path>
+                                        </svg>
+                                        <input type="email" class="form-control" id="target-email" name="target-email"
+                                            placeholder="you@example.com" autocomplete="off" spellcheck="false"
+                                            aria-describedby="target-error-msg" required>
+                                    </div>
+                                    <div id="target-error-msg" class="input-error-message hidden" role="alert">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                        </svg>
+                                        <span>Please enter a valid email address</span>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <span class="hint-text">Nothing is sent anywhere — this runs in your browser.</span>
+                                    <button id="convert-button" type="submit" class="btn btn-primary">
+                                        <span class="btn-spinner" aria-hidden="true"></span>
+                                        <span class="btn-label">Convert email</span>
+                                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                                            aria-hidden="true">
+                                            <path d="M5 12h14M13 6l6 6-6 6"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="grid-item duck-splash">
+                            <img src="static/D.-Proof-of-Trackers-v-4.gif" alt="Animated demonstration of DuckDuckGo email tracker removal"
+                                loading="lazy" decoding="async">
+                        </div>
                     </div>
-                    <div class="grid-item duck-splash">
-                        <img src="static/D.-Proof-of-Trackers-v-4.gif" alt="Duck Address">
+                    <div id="output-container" role="status" aria-live="polite">
+                        <p class="result-label">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M20 6L9 17l-5-5"></path>
+                            </svg>
+                            Ready to use
+                        </p>
+                        <p class="m-0">Send your email to the address below using the forwarding address you
+                            provided when you created your @duck.com address.</p>
+                        <hr />
+                        <div class="output-email-container">
+                            <strong id="output-email" class="text-small">Output email</strong>
+                            <button id="output-email-copy-link" type="button" class="btn-link">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                    aria-hidden="true">
+                                    <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                                <span>Copy</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div id="output-container">
-                    <p class="m-0">Send your email to the following address using the forwarding address you provided
-                        when you created your '@duck.com' address.
+                    <p class="card-text text-small text-muted mt-2">
+                        DuckMailer is a tool that automatically converts the target address to a valid duck address
+                        that DuckDuckGo™ will accept and forward the email to the target email address.
                     </p>
-                    <hr />
-                    <div class="output-email-container">
-                        <strong id="output-email" class="text-small">Output email</strong>
-                        <button id="output-email-copy-link"
-                            class="btn-link text-secondary text-uppercase text-small">copy</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            aria-hidden="true">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        Email Protection from DuckDuckGo™
+                    </h5>
+                    <p class="card-text">DuckDuckGo's email protection assigns you a free "@duck.com" email address
+                        (name@duck.com). Before forwarding the email to your personal inbox, your duck address
+                        filters out multiple types of hidden email trackers.
+                        <a href="https://spreadprivacy.com/protect-your-inbox-with-duckduckgo-email-protection/"
+                            target="_blank" rel="noopener">Learn more</a>
+                    </p>
+
+                    <blockquote class="blockquote">
+                        We remove most hidden trackers from incoming emails sent to this address, then forward them
+                        to your regular inbox for safer reading. This means if you use an email service like Gmail or
+                        Yahoo, it's no problem! Emails sent to your Personal Duck Address will arrive there as usual
+                        so you can read your email like normal, in any app or on the web, worry-free.
+                        <footer class="blockquote footer">DuckDuckGo</footer>
+                    </blockquote>
+
+                    <div class="cta-row">
+                        <a class="btn" href="https://duck.com/email" target="_blank" rel="noopener">
+                            Get your @duck.com address
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M5 12h14M13 6l6 6-6 6"></path>
+                            </svg>
+                        </a>
                     </div>
                 </div>
-                <p class="card-text text-small text-muted mt-2">
-                    DuckMailer is a tool that automatically converts the target address to a valid duck address that
-                    DuckDuckGo™ will accept and forward the email to the target email address.
-                </p>
             </div>
         </div>
-
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title"><b>Email Protection </b>from DuckDuckGo™</h5>
-                <p class="card-text">DuckDuckGo's email protection assigns you a free “@duck.com” email address
-                    (name@duck.com). Before forwarding the email to your personal inbox, your duck address filters out
-                    multiple types of hidden email trackers.
-                    <a href="https://spreadprivacy.com/protect-your-inbox-with-duckduckgo-email-protection/"
-                        target="_blank">Learn more</a>
-                </p>
-
-                <!-- blockquote -->
-                <blockquote class="blockquote">
-                    We remove most hidden trackers from incoming emails sent to this address, then forward them to your
-                    regular inbox for safer reading. This means if you use an email service like Gmail or Yahoo, it’s no
-                    problem! Emails
-                    sent to your Personal Duck Address will arrive there as usual so you can read your email like
-                    normal, in any app or on the
-                    web, worry-free.
-
-                    <footer class="blockquote footer">DuckDuckGo</footer>
-                </blockquote>
-
-                <!-- button to get duck email address -->
-                <div class="text-end">
-                    <a href="https://duck.com/email" target="_blank"><b>Get your @duck.com address</b></a>
-                </div>
-            </div>
-        </div>
-    </div>
+    </main>
 
     <!-- snackbar -->
-    <div id="snackbar" class="snackbar">
+    <div id="snackbar" class="snackbar" role="status" aria-live="polite">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+            stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 6L9 17l-5-5"></path>
+        </svg>
         <p class="snackbar-text">Copied to clipboard</p>
     </div>
 
-    <!-- bottom banner -->
-    <div class="bottom-banner">
-        <div class="bottom-banner-content">
-            <p class="text-small">DuckMailer has no affiliation with DuckDuckGo™ or endorsed by it. It's just a tool to
-                help spread the
-                word about DuckDuckGo's email protection.
-                <a href="https://spreadprivacy.com/" target="_blank" class="hashtag">#SpreadPrivacy</a>
+    <!-- footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p class="text-small text-muted">DuckMailer has no affiliation with DuckDuckGo™ or endorsed by it. It's
+                just a tool to help spread the word about DuckDuckGo's email protection.
+                <a href="https://spreadprivacy.com/" target="_blank" rel="noopener" class="hashtag">#SpreadPrivacy</a>
             </p>
         </div>
-    </div>
+    </footer>
     <script src="public/script.js"></script>
 </body>
 
