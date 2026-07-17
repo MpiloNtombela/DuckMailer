@@ -80,103 +80,240 @@
                         </svg>
                         DuckMailer Tool
                     </h4>
+
+                    <div class="tabs" role="tablist" aria-label="DuckMailer mode">
+                        <button type="button" class="tab is-active" id="tab-convert" role="tab" aria-selected="true"
+                            aria-controls="panel-convert">Convert</button>
+                        <button type="button" class="tab" id="tab-decode" role="tab" aria-selected="false"
+                            aria-controls="panel-decode" tabindex="-1">Decode</button>
+                    </div>
+
                     <div class="grid">
                         <div class="grid-item">
-                            <form id="duckmailer-form" novalidate>
-                                <div class="form-group">
-                                    <label for="duck-email">Duck Address (__@duck.com)</label>
-                                    <div class="input-wrap">
-                                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                            aria-hidden="true">
-                                            <path d="M3 7l9 6 9-6"></path>
-                                            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-                                        </svg>
-                                        <input type="text" class="form-control" id="duck-email"
-                                            pattern="[a-zA-Z0-9._%+-]+@duck\.com$" name="duck-email"
-                                            placeholder="name@duck.com" autocomplete="email" spellcheck="false"
-                                            aria-describedby="duck-error-msg" required>
+
+                            <div id="panel-convert" role="tabpanel" aria-labelledby="tab-convert">
+                                <form id="duckmailer-form" novalidate>
+                                    <div class="form-group">
+                                        <div class="label-row">
+                                            <label for="duck-email">Duck Address (__@duck.com)</label>
+                                            <button type="button" id="duck-forget" class="text-link-btn hidden">Not
+                                                you?</button>
+                                        </div>
+                                        <div class="input-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" aria-hidden="true">
+                                                <path d="M3 7l9 6 9-6"></path>
+                                                <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                                            </svg>
+                                            <input type="text" class="form-control" id="duck-email"
+                                                pattern="[a-zA-Z0-9._%+-]+@duck\.com$" name="duck-email"
+                                                placeholder="name@duck.com" autocomplete="email" spellcheck="false"
+                                                aria-describedby="duck-error-msg" required>
+                                        </div>
+                                        <div id="duck-error-msg" class="input-error-message hidden" role="alert">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                            </svg>
+                                            <span>Please enter a valid @duck.com email address</span>
+                                        </div>
                                     </div>
-                                    <div id="duck-error-msg" class="input-error-message hidden" role="alert">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                            <circle cx="12" cy="12" r="10"></circle>
-                                            <line x1="12" y1="8" x2="12" y2="12"></line>
-                                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                    <!-- target email address -->
+                                    <div class="form-group target-email">
+                                        <label for="target-email">Target Email Address</label>
+                                        <div class="input-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" aria-hidden="true">
+                                                <path d="M22 12a10 10 0 1 1-5.93-9.14"></path>
+                                                <path d="M22 3L12 12"></path>
+                                            </svg>
+                                            <input type="email" class="form-control" id="target-email"
+                                                name="target-email" placeholder="you@example.com" autocomplete="off"
+                                                spellcheck="false" aria-describedby="target-error-msg" required>
+                                        </div>
+                                        <div id="target-error-msg" class="input-error-message hidden" role="alert">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                            </svg>
+                                            <span>Please enter a valid email address</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <span class="hint-text">Nothing is sent anywhere — this runs in your
+                                            browser.</span>
+                                        <button id="convert-button" type="submit" class="btn btn-primary">
+                                            <span class="btn-spinner" aria-hidden="true"></span>
+                                            <span class="btn-label">Convert email</span>
+                                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                                stroke-linejoin="round" aria-hidden="true">
+                                                <path d="M5 12h14M13 6l6 6-6 6"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </form>
+                                <div id="output-container" class="result-panel" role="status" aria-live="polite">
+                                    <p class="result-label">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                            stroke-linejoin="round" aria-hidden="true">
+                                            <path d="M20 6L9 17l-5-5"></path>
                                         </svg>
-                                        <span>Please enter a valid @duck.com email address</span>
+                                        Ready to use
+                                    </p>
+                                    <p class="m-0">Send your email to the address below using the forwarding address
+                                        you provided when you created your @duck.com address.</p>
+                                    <hr />
+                                    <div class="output-email-container">
+                                        <strong id="output-email" class="text-small">Output email</strong>
+                                        <div class="output-actions">
+                                            <button id="output-email-share" type="button"
+                                                class="btn-link hidden">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" aria-hidden="true">
+                                                    <circle cx="18" cy="5" r="3"></circle>
+                                                    <circle cx="6" cy="12" r="3"></circle>
+                                                    <circle cx="18" cy="19" r="3"></circle>
+                                                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                                                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                                                </svg>
+                                                <span>Share</span>
+                                            </button>
+                                            <button id="output-email-copy-link" type="button" class="btn-link">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" aria-hidden="true">
+                                                    <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+                                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1">
+                                                    </path>
+                                                </svg>
+                                                <span>Copy</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <p class="text-small link-row">
+                                        <button id="output-copy-link" type="button" class="text-link-btn">Copy a
+                                            link to this pairing</button>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div id="panel-decode" role="tabpanel" aria-labelledby="tab-decode" hidden>
+                                <form id="decode-form" novalidate>
+                                    <div class="form-group">
+                                        <label for="fwd-email">Duck Forwarding Address</label>
+                                        <div class="input-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="11" cy="11" r="7"></circle>
+                                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                            </svg>
+                                            <input type="text" class="form-control" id="fwd-email" name="fwd-email"
+                                                placeholder="friend_at_example.com_name@duck.com" autocomplete="off"
+                                                spellcheck="false" aria-describedby="fwd-error-msg" required>
+                                        </div>
+                                        <div id="fwd-error-msg" class="input-error-message hidden" role="alert">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                            </svg>
+                                            <span>That doesn't look like a DuckMailer-generated forwarding
+                                                address</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <span class="hint-text">Paste an address DuckMailer generated to see what
+                                            it decodes to.</span>
+                                        <button id="decode-button" type="submit" class="btn btn-primary">
+                                            <span class="btn-spinner" aria-hidden="true"></span>
+                                            <span class="btn-label">Decode address</span>
+                                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                                stroke-linejoin="round" aria-hidden="true">
+                                                <path d="M5 12h14M13 6l6 6-6 6"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </form>
+                                <div id="decode-output-container" class="result-panel" role="status"
+                                    aria-live="polite">
+                                    <p class="result-label">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                            stroke-linejoin="round" aria-hidden="true">
+                                            <path d="M20 6L9 17l-5-5"></path>
+                                        </svg>
+                                        Decoded
+                                    </p>
+                                    <div class="decode-row">
+                                        <span class="decode-label">Target email</span>
+                                        <div class="output-email-container">
+                                            <strong id="decode-target" class="text-small">—</strong>
+                                            <button id="decode-target-copy" type="button" class="btn-link">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" aria-hidden="true">
+                                                    <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+                                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1">
+                                                    </path>
+                                                </svg>
+                                                <span>Copy</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="decode-row">
+                                        <span class="decode-label">Duck address</span>
+                                        <div class="output-email-container">
+                                            <strong id="decode-duck" class="text-small">—</strong>
+                                            <button id="decode-duck-copy" type="button" class="btn-link">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" aria-hidden="true">
+                                                    <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+                                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1">
+                                                    </path>
+                                                </svg>
+                                                <span>Copy</span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                                <!-- target email address -->
-                                <div class="form-group target-email">
-                                    <label for="target-email">Target Email Address</label>
-                                    <div class="input-wrap">
-                                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                            aria-hidden="true">
-                                            <path d="M22 12a10 10 0 1 1-5.93-9.14"></path>
-                                            <path d="M22 3L12 12"></path>
-                                        </svg>
-                                        <input type="email" class="form-control" id="target-email" name="target-email"
-                                            placeholder="you@example.com" autocomplete="off" spellcheck="false"
-                                            aria-describedby="target-error-msg" required>
-                                    </div>
-                                    <div id="target-error-msg" class="input-error-message hidden" role="alert">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                            <circle cx="12" cy="12" r="10"></circle>
-                                            <line x1="12" y1="8" x2="12" y2="12"></line>
-                                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                                        </svg>
-                                        <span>Please enter a valid email address</span>
-                                    </div>
-                                </div>
-                                <div class="form-actions">
-                                    <span class="hint-text">Nothing is sent anywhere — this runs in your browser.</span>
-                                    <button id="convert-button" type="submit" class="btn btn-primary">
-                                        <span class="btn-spinner" aria-hidden="true"></span>
-                                        <span class="btn-label">Convert email</span>
-                                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                                            aria-hidden="true">
-                                            <path d="M5 12h14M13 6l6 6-6 6"></path>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </form>
+                            </div>
+
                         </div>
                     </div>
-                    <div id="output-container" role="status" aria-live="polite">
-                        <p class="result-label">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M20 6L9 17l-5-5"></path>
-                            </svg>
-                            Ready to use
-                        </p>
-                        <p class="m-0">Send your email to the address below using the forwarding address you
-                            provided when you created your @duck.com address.</p>
-                        <hr />
-                        <div class="output-email-container">
-                            <strong id="output-email" class="text-small">Output email</strong>
-                            <button id="output-email-copy-link" type="button" class="btn-link">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                    aria-hidden="true">
-                                    <rect x="9" y="9" width="13" height="13" rx="2"></rect>
-                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                                </svg>
-                                <span>Copy</span>
-                            </button>
-                        </div>
-                    </div>
+
                     <p class="card-text text-small text-muted mt-2">
                         DuckMailer is a tool that automatically converts the target address to a valid duck address
                         that DuckDuckGo™ will accept and forward the email to the target email address.
                     </p>
+
+                    <div id="history-section" class="history-section hidden">
+                        <div class="history-header">
+                            <span class="history-title">Recent conversions</span>
+                            <button id="history-clear" type="button" class="text-link-btn">Clear</button>
+                        </div>
+                        <ul id="history-list" class="history-list"></ul>
+                    </div>
+
                     <div class="duck-splash">
-                        <img src="static/D.-Proof-of-Trackers-v-4.gif" alt="Animated demonstration of DuckDuckGo email tracker removal"
-                            loading="lazy" decoding="async">
+                        <img src="static/D.-Proof-of-Trackers-v-4.gif"
+                            alt="Animated demonstration of DuckDuckGo email tracker removal" loading="lazy"
+                            decoding="async">
                     </div>
                 </div>
             </div>
