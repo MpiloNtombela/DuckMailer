@@ -734,6 +734,20 @@ blockquote.blockquote footer::before {
 }
 
 /* -------------------------------------------------------------------- */
+/* Form + illustration grid                                              */
+/* -------------------------------------------------------------------- */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.grid-item {
+  min-width: 0;
+}
+
+/* -------------------------------------------------------------------- */
 /* Duck splash art                                                       */
 /* -------------------------------------------------------------------- */
 .duck-splash {
@@ -745,10 +759,13 @@ blockquote.blockquote footer::before {
   border-radius: var(--radius);
 }
 
-@media (min-width: 640px) {
+@media (min-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr 170px;
+  }
+
   .duck-splash {
     display: block;
-    margin-top: 1.4rem;
   }
 }
 
